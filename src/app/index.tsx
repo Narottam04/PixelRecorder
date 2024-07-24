@@ -1,94 +1,75 @@
 import { Link } from "expo-router";
 import React from "react";
-import { Text, View } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Text, View, TextInput, ScrollView } from "react-native";
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
+import AntDesign from "@expo/vector-icons/AntDesign";
 
 export default function Page() {
-  return (
-    <View className="flex flex-1">
-      <Header />
-      <Content />
-      <Footer />
-    </View>
-  );
-}
+  const { top } = useSafeAreaInsets();
 
-function Content() {
   return (
-    <View className="flex-1">
-      <View className="py-12 md:py-24 lg:py-32 xl:py-48">
-        <View className="px-4 md:px-6">
-          <View className="flex flex-col items-center gap-4 text-center">
-            <Text
-              role="heading"
-              className="text-3xl text-center native:text-5xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl"
+    <View style={{ paddingTop: top, flex: 1 }}>
+      <View className="bg-[#131313] w-full h-full">
+        {/* input header */}
+        <View className="mt-[30px] mb-[22px] flex-row items-center bg-[#1f1f1f] rounded-lg p-3 mx-[20px]">
+          <AntDesign
+            name="search1"
+            size={20}
+            color="white"
+            style={{ marginRight: 10 }}
+          />
+          <TextInput
+            className="flex-1 text-[15px] text-white"
+            placeholder="Search your recordings"
+            placeholderTextColor="gray"
+            style={{ color: "white" }}
+          />
+        </View>
+        <ScrollView contentContainerStyle={{ paddingBottom: 20 }}>
+          {/* month */}
+          <View className="mb-[22px] mx-[20px]">
+            <Text className="text-[#DEDEDE] text-[20px] font-medium ">
+              June
+            </Text>
+          </View>
+          <Link
+            href="/audioPlayerPage"
+            className="text-[#DEDEDE] text-[20px] font-medium "
+          >
+            Link to new page
+          </Link>
+          {/* cards */}
+          {Array.from({ length: 10 }).map((_, index) => (
+            <View
+              key={index}
+              className="my-2 mx-[20px] flex flex-col justify-center items-start gap-4 self-stretch p-5 bg-[#1F1F1F] rounded-2xl"
             >
-              Welcome to Project ACME
-            </Text>
-            <Text className="mx-auto max-w-[700px] text-lg text-center text-gray-500 md:text-xl dark:text-gray-400">
-              Discover and collaborate on amce. Explore our services now.
-            </Text>
-
-            <View className="gap-4">
-              <Link
-                suppressHighlighting
-                className="flex h-9 items-center justify-center overflow-hidden rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-gray-50 web:shadow ios:shadow transition-colors hover:bg-gray-900/90 active:bg-gray-400/90 web:focus-visible:outline-none web:focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-50/90 dark:focus-visible:ring-gray-300"
-                href="/"
-              >
-                Explore
-              </Link>
+              <View className="flex flex-row justify-between items-center w-full">
+                <Text className="text-[#DEDEDE] font-medium">
+                  Valeria- Tuesday at 7:31 PM
+                </Text>
+                <AntDesign name="play" size={16} color="white" />
+              </View>
+              <View className="flex flex-row justify-between items-center w-full">
+                <Text className="text-[#c9c9c9]">Jun 25</Text>
+                <Text className="text-[#c9c9c9]">21:18</Text>
+              </View>
+              <View className="w-full h-1 bg-blue-500 rounded-full"></View>
+            </View>
+          ))}
+        </ScrollView>
+        {/* Recording button */}
+        <View className="flex-1 bg-[#131313]">
+          <View className="absolute left-0 right-0 bottom-[50px] items-center">
+            <View className="w-[85px] h-[85px] bg-[#EF665C] rounded-full justify-center items-center">
+              <View className="w-[23px] h-[23px] bg-[#601510] rounded-full" />
             </View>
           </View>
         </View>
-      </View>
-    </View>
-  );
-}
-
-function Header() {
-  const { top } = useSafeAreaInsets();
-  return (
-    <View style={{ paddingTop: top }}>
-      <View className="px-4 lg:px-6 h-14 flex items-center flex-row justify-between ">
-        <Link className="font-bold flex-1 items-center justify-center" href="/">
-          ACME
-        </Link>
-        <View className="flex flex-row gap-4 sm:gap-6">
-          <Link
-            className="text-md font-medium hover:underline web:underline-offset-4"
-            href="/"
-          >
-            About
-          </Link>
-          <Link
-            className="text-md font-medium hover:underline web:underline-offset-4"
-            href="/"
-          >
-            Product
-          </Link>
-          <Link
-            className="text-md font-medium hover:underline web:underline-offset-4"
-            href="/"
-          >
-            Pricing
-          </Link>
-        </View>
-      </View>
-    </View>
-  );
-}
-
-function Footer() {
-  const { bottom } = useSafeAreaInsets();
-  return (
-    <View
-      className="flex shrink-0 bg-gray-100 native:hidden"
-      style={{ paddingBottom: bottom }}
-    >
-      <View className="py-6 flex-1 items-start px-4 md:px-6 ">
-        <Text className={"text-center text-gray-700"}>
-          © {new Date().getFullYear()} Me
-        </Text>
+        {/*  */}
       </View>
     </View>
   );
