@@ -1,6 +1,6 @@
-import { Link } from "expo-router";
+import { Link, useNavigation } from "expo-router";
 import React from "react";
-import { Text, View, TextInput, ScrollView } from "react-native";
+import { Text, View, TextInput, ScrollView, Pressable } from "react-native";
 import {
   SafeAreaView,
   useSafeAreaInsets,
@@ -35,30 +35,25 @@ export default function Page() {
               June
             </Text>
           </View>
-          <Link
-            href="/audioPlayerPage"
-            className="text-[#DEDEDE] text-[20px] font-medium "
-          >
-            Link to new page
-          </Link>
           {/* cards */}
           {Array.from({ length: 10 }).map((_, index) => (
-            <View
-              key={index}
-              className="my-2 mx-[20px] flex flex-col justify-center items-start gap-4 self-stretch p-5 bg-[#1F1F1F] rounded-2xl"
-            >
-              <View className="flex flex-row justify-between items-center w-full">
-                <Text className="text-[#DEDEDE] font-medium">
-                  Valeria- Tuesday at 7:31 PM
-                </Text>
-                <AntDesign name="play" size={16} color="white" />
-              </View>
-              <View className="flex flex-row justify-between items-center w-full">
-                <Text className="text-[#c9c9c9]">Jun 25</Text>
-                <Text className="text-[#c9c9c9]">21:18</Text>
-              </View>
-              <View className="w-full h-1 bg-blue-500 rounded-full"></View>
-            </View>
+            <Link href="/audioPlayerPage" asChild className=" ">
+              <Pressable>
+                <View className=" my-2 mx-[20px] flex flex-col justify-center items-start gap-4 self-stretch p-5 bg-[#1F1F1F] rounded-2xl">
+                  <View className="flex flex-row justify-between items-center w-full">
+                    <Text className="text-[#DEDEDE] font-medium">
+                      Valeria- Tuesday at 7:31 PM
+                    </Text>
+                    <AntDesign name="play" size={16} color="white" />
+                  </View>
+                  <View className="flex flex-row justify-between items-center w-full">
+                    <Text className="text-[#c9c9c9]">Jun 25</Text>
+                    <Text className="text-[#c9c9c9]">21:18</Text>
+                  </View>
+                  <View className="w-full h-1 bg-blue-500 rounded-full"></View>
+                </View>
+              </Pressable>
+            </Link>
           ))}
         </ScrollView>
         {/* Recording button */}
