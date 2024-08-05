@@ -1,14 +1,36 @@
 import { Link, useNavigation } from "expo-router";
-import React from "react";
+import React, { useEffect } from "react";
 import { Text, View, TextInput, ScrollView, Pressable } from "react-native";
 import {
   SafeAreaView,
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import { Audio } from "expo-av";
+import * as FileSystem from "expo-file-system";
+import { useRecContext } from "@/context/RecContext";
 
 export default function Page() {
   const { top } = useSafeAreaInsets();
+  const { recordings, setRecordings } = useRecContext();
+
+  console.log(recordings);
+
+  const RECORDINGS_DIRECTORY = FileSystem.documentDirectory + "pixelRecording/";
+
+  useEffect(() => {
+    Audio.requestPermissionsAsync();
+    ensureDirectoryExists();
+  }, []);
+
+  async function ensureDirectoryExists() {
+    const dirInfo = await FileSystem.getInfoAsync(RECORDINGS_DIRECTORY);
+    if (!dirInfo.exists) {
+      await FileSystem.makeDirectoryAsync(RECORDINGS_DIRECTORY, {
+        intermediates: true,
+      });
+    }
+  }
 
   return (
     <View style={{ paddingTop: top, flex: 1 }}>
