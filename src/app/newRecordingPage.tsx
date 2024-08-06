@@ -11,7 +11,7 @@ import Entypo from "@expo/vector-icons/Entypo";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useRecContext } from "@/context/RecContext";
 
-const AudioPlayerScreen = () => {
+const NewRecordingScreen = () => {
   const { top } = useSafeAreaInsets();
   const [selectedTab, setSelectedTab] = useState("Audio");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -185,4 +185,4 @@ const AudioPlayerScreen = () => {
   );
 };
 
-export default AudioPlayerScreen;
+export default NewRecordingScreen;

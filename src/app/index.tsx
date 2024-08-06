@@ -12,7 +12,7 @@ import { useRecContext } from "@/context/RecContext";
 
 export default function Page() {
   const { top } = useSafeAreaInsets();
-  const { recordings, setRecordings } = useRecContext();
+  const { recordings, setRecordings, loadRecordings } = useRecContext();
 
   console.log(recordings);
 
@@ -21,6 +21,7 @@ export default function Page() {
   useEffect(() => {
     Audio.requestPermissionsAsync();
     ensureDirectoryExists();
+    loadRecordings();
   }, []);
 
   async function ensureDirectoryExists() {
@@ -81,9 +82,11 @@ export default function Page() {
         {/* Recording button */}
         <View className="flex-1 bg-[#131313]">
           <View className="absolute left-0 right-0 bottom-[50px] items-center">
-            <View className="w-[85px] h-[85px] bg-[#EF665C] rounded-full justify-center items-center">
-              <View className="w-[23px] h-[23px] bg-[#601510] rounded-full" />
-            </View>
+            <Link href="/newRecordingPage" asChild>
+              <View className="w-[85px] h-[85px] bg-[#EF665C] rounded-full justify-center items-center">
+                <View className="w-[23px] h-[23px] bg-[#601510] rounded-full" />
+              </View>
+            </Link>
           </View>
         </View>
         {/*  */}
